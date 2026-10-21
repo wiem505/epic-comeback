@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Round 2: Visual CM Pitch</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h3>ROUND 2: VISUAL LORE DECK</h3>
+            <div class="symbols">⭕ 🔺 🟩</div>
+        </div>
+
+        <div class="terminal-body" id="terminal-screen">
+            <p><span class="command">&gt;</span> ROLE: Certified Chronically Online CM</p>
+            <p><span class="command">&gt;</span> STATUS: Visual pipeline active <span class="eliminated">[TRUE]</span></p>
+            <br>
+            
+            <!-- MEME VISUAL CONTAINER (Add your image filename in src="") -->
+            <div class="meme-container">
+                <img id="meme-img" src="thinkaboutit.jpg" alt="A person looking thoughtfully into the distance" onerror="this.style.display = 'none'; document.getElementById('meme-fallback').style.display = 'block';">
+                <div id="meme-fallback" role="status" style="display: none; color: #f8f8f2; border: 1px solid #ff0055; padding: 12px; text-align: center;">Meme could not be loaded.</div>
+            </div>
+            
+            <p class="instruction" id="instruction-text">&gt; ACTION: Start Level 1: Discord Lore.</p>
+        </div>
+
+        <!-- MAIN CONTROL BUTTON -->
+        <button id="main-btn" class="pitch-btn" onclick="nextGameStep()">START LEVEL 1: DISCORD LORE</button>
+
+        <!-- INTERACTIVE GAME / REWARD BOX -->
+        <div id="success-box" class="success-box" style="display: none;">
+            <p class="success-title" id="game-title">&gt; LEVEL 1: DISCORD LORE 👾</p>
+            <p class="success-desc" id="game-desc">&bull; Responding to "gm" at 3 AM: Instantly.<br>&bull; Blaming bugs on "feature, not a bug": Expert.</p>
+            
+            <div class="action-buttons" id="game-actions">
+                <button class="action-btn hacker-choice" onclick="unlockSecret(1)">[Inspect Copypasta]</button>
+                <button class="action-btn hacker-choice" onclick="unlockSecret(2)">[Ping Everyone]</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Logic JavaScript -->
+    <script>
+        let step = 0;
+
+        function setMeme(src, alt) {
+            const memeImg = document.getElementById('meme-img');
+            document.getElementById('meme-fallback').style.display = 'none';
+            memeImg.style.display = '';
+            memeImg.alt = alt;
+            memeImg.src = src;
+        }
+
+        function nextGameStep() {
+            const successBox = document.getElementById('success-box');
+            const mainBtn = document.getElementById('main-btn');
+            
+            if (step === 0) {
+                successBox.style.display = 'block';
+                document.getElementById('game-title').innerText = "> LEVEL 1: DISCORD LORE 👾";
+                document.getElementById('game-desc').innerHTML = "&bull; Responding to \"gm\" at 3 AM: Instantly.<br>&bull; Blaming bugs on \"feature, not a bug\": Expert.";
+                document.getElementById('game-actions').innerHTML = `
+                    <button class="action-btn hacker-choice" onclick="unlockSecret(1)">[Inspect Copypasta]</button>
+                    <button class="action-btn hacker-choice" onclick="unlockSecret(2)">[Ping Everyone]</button>
+                `;
+                document.getElementById('instruction-text').innerText = "> ACTION: Choose a Level 1 response or access Level 2.";
+                mainBtn.innerText = "ACCESS LEVEL 2: GRASS PHOBIA";
+                step = 1;
+            } else if (step === 1) {
+                setMeme("laughingleo.jpg", "Leonardo DiCaprio laughing");
+                
+                document.getElementById('game-title').innerText = "> LEVEL 2: GRASS PHOBIA 🌱";
+                document.getElementById('game-desc').innerHTML = "&bull; Sun exposure: 0%.<br>&bull; Screen brightness: Blinding.<br>&bull; Chat engagement: Maximum.";
+                document.getElementById('game-actions').innerHTML = `
+                    <button class="action-btn hacker-choice" onclick="unlockSecret(3)">[Simulate Sunlight]</button>
+                    <button class="action-btn hacker-choice" onclick="nextGameStep()">[Next Level &rarr;]</button>
+                `;
+                document.getElementById('instruction-text').innerText = "> ACTION: Choose a response or access Level 3.";
+                mainBtn.innerText = "ACCESS LEVEL 3: NO EXP BUFF";
+                step = 2;
+            } else if (step === 2) {
+                setMeme("changemymind.jpg", "A person holding a Change My Mind sign");
+                
+                document.getElementById('game-title').innerText = "> LEVEL 3: THE 'NO EXP' BUFF 🎮";
+                document.getElementById('game-desc').innerHTML = "&bull; Corporate baggage: 0.<br>&bull; Fresh chaotic energy: 100%.<br>&bull; Learning speed: Speedrun mode.";
+                document.getElementById('game-actions').innerHTML = `
+                    <button class="action-btn hacker-choice" onclick="unlockSecret(4)">[Check Vibe Check]</button>
+                    <button class="action-btn hacker-choice" onclick="nextGameStep()">[Final Boss &rarr;]</button>
+                `;
+                document.getElementById('instruction-text').innerText = "> ACTION: Check the vibe or claim the ultimate reward.";
+                mainBtn.innerText = "CLAIM ULTIMATE REWARD";
+                step = 3;
+            } else if (step === 3) {
+                setMeme("absolutecinema.jpg", "The Absolute Cinema meme");
+
+                document.getElementById('game-title').innerText = "> 🎉 EASTER EGG FOUND: HIRE THEM";
+                document.getElementById('game-desc').innerHTML = "&bull; Loot unlocked: Zero drama, maximum hype.<br>&bull; Status: Ready to manage your chat.";
+                document.getElementById('game-actions').innerHTML = `
+                    <a href="https://instagram.com/shxdowkda" target="_blank" rel="noopener noreferrer" class="action-btn reward-btn">📸 Send Offer on IG</a>
+                    <button class="action-btn hacker-choice" onclick="resetGame()">[Reboot Lore]</button>
+                `;
+                document.getElementById('instruction-text').innerText = "> ACTION: Reboot lore to play again.";
+                mainBtn.style.display = 'none';
+                step = 4;
+            }
+
+            successBox.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function unlockSecret(choice) {
+            const gameDesc = document.getElementById('game-desc');
+
+            if (choice === 1) {
+                setMeme("laughingleo.jpg", "Leonardo DiCaprio laughing");
+                gameDesc.innerHTML = "&bull; Copypasta loaded: Elite trolling avoided.<br>&bull; Status: Smooth conversation flow.";
+                document.getElementById('instruction-text').innerText = "> ACTION: Access Level 2 when ready.";
+            } else if (choice === 2) {
+                setMeme("dogacceptingfate.jpg", "A dog accepting its fate");
+                gameDesc.innerHTML = "&bull; WARNING: You pinged @everyone.<br>&bull; Solution: Deployed emergency meme.";
+                document.getElementById('instruction-text').innerText = "> ACTION: Access Level 2 when ready.";
+            } else if (choice === 3) {
+                setMeme("womanyellingonacat.jpg", "Woman yelling at a cat");
+                gameDesc.innerHTML = "&bull; ERROR 404: Sunlight rejected.<br>&bull; Redirecting back to Discord...";
+                document.getElementById('instruction-text').innerText = "> ACTION: Access Level 3 when ready.";
+            } else if (choice === 4) {
+                setMeme("womanyellingonacat.jpg", "Woman yelling at a cat");
+                gameDesc.innerHTML = "&bull; Vibe check: Passed instantly.<br>&bull; Ready to launch custom emotes.";
+                document.getElementById('instruction-text').innerText = "> ACTION: Claim the ultimate reward when ready.";
+            }
+        }
+
+        function resetGame() {
+            step = 0;
+            document.getElementById('success-box').style.display = 'none';
+            const mainBtn = document.getElementById('main-btn');
+            mainBtn.style.display = 'block';
+            mainBtn.innerText = "START LEVEL 1: DISCORD LORE";
+            
+            setMeme("thinkaboutit.jpg", "A person looking thoughtfully into the distance");
+            document.getElementById('instruction-text').innerText = "> ACTION: Start Level 1: Discord Lore.";
+            
+            document.getElementById('game-title').innerText = "> LEVEL 1: DISCORD LORE 👾";
+            document.getElementById('game-desc').innerHTML = "&bull; Responding to \"gm\" at 3 AM: Instantly.<br>&bull; Blaming bugs on \"feature, not a bug\": Expert.";
+            document.getElementById('game-actions').innerHTML = `
+                <button class="action-btn hacker-choice" onclick="unlockSecret(1)">[Inspect Copypasta]</button>
+                <button class="action-btn hacker-choice" onclick="unlockSecret(2)">[Ping Everyone]</button>
+            `;
+        }
+    </script>
+
+</body>
+</html>
